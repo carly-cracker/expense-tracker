@@ -5,7 +5,7 @@ import { expenses } from './expenses'
 const ExpenseTable = ({children})=> {
   return (
     <>
-    <div> 
+    <div className='table-section'> 
         <h3>ExpenseTable</h3>
         <table>
             <thead>

@@ -43,8 +43,14 @@ function ExpenseForm(){
     } 
     return(
         <>
-         <div>
+        <div className="container">
+         <div className="form-card">
             <h3>Add Expense</h3>
+            <span 
+          style={{color:"grey"
+          }}>
+            Enter your expense details below
+         </span>
             <form onSubmit={handleFormSubmit}>
                 <input
                 id="name"
@@ -90,8 +96,8 @@ function ExpenseForm(){
                     submit
                 </button>
             </form>
-         </div>  
-         <ExpenseTable>
+            </div>
+            <ExpenseTable>
             {formData.map((data )=>(
          <tr key={data.id} > 
                         <td>{data.name}</td>
@@ -102,6 +108,8 @@ function ExpenseForm(){
                      </tr>
                      ))}
          </ExpenseTable>
+         </div>  
+         
         </>
     )
 
