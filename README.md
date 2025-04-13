@@ -10,7 +10,7 @@ A simple React-based application for tracking your expenses. Users can add new e
 
 ##  Preview
 
-(public/Screenshot from 2025-04-13 22-24-13.png)
+![App Preview] (public/Screenshot from 2025-04-13 22-24-13.png)
 
 ##  Tech Stack
 
