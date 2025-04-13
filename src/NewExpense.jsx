@@ -1,28 +1,46 @@
 import React,{useState} from "react";
+import ExpenseTable from "./ExpenseTable";
+import { expenses,getNextId } from "./expenses";
 
+let allExpenses;
 function ExpenseForm(){
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(expenses)
+    const [newEntry, setNewEntry] = useState({
         name:"",
         description:"",
         category:"",
         expense:"",
         dates:""
-        })
-        
+        })   
+
 
     function handleChange(e){
         const key = e.target.id
-        setFormData({
-            ...formData, 
+        setNewEntry({
+            ...newEntry, 
             [key]:e.target.value
           }) 
+
     }
     function handleFormSubmit(e){
         e.preventDefault()
-        console.log("form submitted",formData)
-    }
-    
+        //console.log("form submitted",newEntry)
+        const newExpenseEntry = { 
+            id: getNextId(),
+            name: newEntry.name,
+            description: newEntry.description,
+            category: newEntry.category,
+            expense: newEntry.expense,
+            dates: newEntry.dates,
+        }
+        const updatedExpenses=[...formData,newExpenseEntry]
+        allExpenses===updatedExpenses
+        setFormData(updatedExpenses)
+        setNewEntry({ name: "", description: "", category: "", expense: "", dates: "" })
+        console.log(updatedExpenses)
+        
+    } 
     return(
         <>
          <div>
@@ -33,7 +51,7 @@ function ExpenseForm(){
                 type="text"
                 placeholder="name"
                 onChange={handleChange}
-                value={formData.name}
+                value={newEntry.name}
                 />
                 <br/>
                 <input
@@ -41,7 +59,7 @@ function ExpenseForm(){
                 type="text"
                 placeholder="expense description"
                 onChange={handleChange}
-                value={formData.description}
+                value={newEntry.description}
                 />
                 <br/>
                 <input
@@ -49,7 +67,7 @@ function ExpenseForm(){
                 type="text"
                 placeholder="expense category"
                 onChange={handleChange}
-                value={formData.category}
+                value={newEntry.category}
                 />
                 <br/>
                 <input
@@ -57,7 +75,7 @@ function ExpenseForm(){
                 type="text"
                 placeholder="expense"
                 onChange={handleChange}
-                value={formData.expense}
+                value={newEntry.expense}
                 />
                 <br/>
                 <input
@@ -65,14 +83,25 @@ function ExpenseForm(){
                 type="date"
                 placeholder="dates"
                 onChange={handleChange}
-                value={formData.dates}
+                value={newEntry.dates}
                 />
                 <br/>
                 <button type="submit" style={{background:"black",borderRadius:"10px", color:"white"}}>
                     submit
                 </button>
             </form>
-         </div>   
+         </div>  
+         <ExpenseTable>
+            {formData.map((data )=>(
+         <tr key={data.id} > 
+                        <td>{data.name}</td>
+                        <td>{data.description}</td>
+                        <td>{data.category}</td>
+                        <td>{data.expense}</td>
+                        <td>{data.dates}</td>
+                     </tr>
+                     ))}
+         </ExpenseTable>
         </>
     )
 
