@@ -3,7 +3,7 @@ import ExpenseTable from "./ExpenseTable";
 import { expenses,getNextId } from "./expenses";
 import SearchBar from "./SearchBar";
 
-let allExpenses;
+
 function ExpenseForm(){
 
     const [searchTerm, setSearchTerm] = useState("");
@@ -48,6 +48,11 @@ function ExpenseForm(){
         item.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
+    const handleExpenseDelete = (id) => {
+        const updatedExpenses = formData.filter((expense)=> expense.id !==id)
+        setFormData(updatedExpenses)
+    }
+
     return(
         <>
         <div className="container">
@@ -59,8 +64,8 @@ function ExpenseForm(){
             Enter your expense details below
          </span>
             <form onSubmit={handleFormSubmit}>
-                <input
-                id="name"
+                <input 
+                id="name" 
                 type="text"
                 placeholder="name"
                 onChange={handleChange}
@@ -112,6 +117,11 @@ function ExpenseForm(){
             <td>{data.category}</td>
             <td>{data.expense}</td>
             <td>{data.dates}</td>
+            <td>
+                <button onClick={()=>handleExpenseDelete(data.id)}>
+                    delete
+                </button>
+            </td>
           </tr>
         ))}
       </ExpenseTable>

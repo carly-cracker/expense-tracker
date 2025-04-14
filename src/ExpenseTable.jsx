@@ -18,6 +18,7 @@ const ExpenseTable = ({children,searchTerm,setSearchTerm})=> {
                 <th>category</th>
                 <th>expense</th>
                 <th>dates</th>
+                <th>clear</th>
               </tr>
             </thead>
             <tbody>
