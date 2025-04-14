@@ -1,10 +1,12 @@
 import React,{useState} from "react";
 import ExpenseTable from "./ExpenseTable";
 import { expenses,getNextId } from "./expenses";
+import SearchBar from "./SearchBar";
 
 let allExpenses;
 function ExpenseForm(){
 
+    const [searchTerm, setSearchTerm] = useState("");
     const [formData, setFormData] = useState(expenses)
     const [newEntry, setNewEntry] = useState({
         name:"",
@@ -41,6 +43,12 @@ function ExpenseForm(){
         console.log(updatedExpenses)
         
     } 
+
+    const filteredData = formData.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
     return(
         <>
         <div className="container">
@@ -97,17 +105,17 @@ function ExpenseForm(){
                 </button>
             </form>
             </div>
-            <ExpenseTable>
-            {formData.map((data )=>(
-         <tr key={data.id} > 
-                        <td>{data.name}</td>
-                        <td>{data.description}</td>
-                        <td>{data.category}</td>
-                        <td>{data.expense}</td>
-                        <td>{data.dates}</td>
-                     </tr>
-                     ))}
-         </ExpenseTable>
+            <ExpenseTable searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
+        {filteredData.map((data) => (
+          <tr key={data.id}>
+            <td>{data.name}</td>
+            <td>{data.description}</td>
+            <td>{data.category}</td>
+            <td>{data.expense}</td>
+            <td>{data.dates}</td>
+          </tr>
+        ))}
+      </ExpenseTable>
          </div>  
          
         </>
