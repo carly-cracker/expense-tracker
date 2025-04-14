@@ -15,7 +15,7 @@ function ExpenseForm(){
         expense:"",
         dates:""
         })   
-
+    const [sortBy, setSortBy] = useState("none");
 
     function handleChange(e){
         const key = e.target.id
@@ -52,17 +52,27 @@ function ExpenseForm(){
         const updatedExpenses = formData.filter((expense)=> expense.id !==id)
         setFormData(updatedExpenses)
     }
-
+    const sortedData = [...filteredData].sort((a, b) => {
+        if (sortBy === "category") {
+          return a.category.localeCompare(b.category);
+        } else if (sortBy === "name") {
+          return a.name.localeCompare(b.name);
+        } else {
+          return 0;
+        }
+        
+      });
+      console.log(sortedData)
     return(
         <>
         <div className="container">
          <div className="form-card">
             <h3>Add Expense</h3>
-            <span 
+        <span 
           style={{color:"grey"
           }}>
             Enter your expense details below
-         </span>
+        </span>
             <form onSubmit={handleFormSubmit}>
                 <input 
                 id="name" 
@@ -109,8 +119,9 @@ function ExpenseForm(){
                 </button>
             </form>
             </div>
-            <ExpenseTable searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
-        {filteredData.map((data) => (
+            <ExpenseTable searchTerm={searchTerm} setSearchTerm={setSearchTerm} sortBy={sortBy} 
+  setSortBy={setSortBy}>
+        {sortedData.map((data) => (
           <tr key={data.id}>
             <td>{data.name}</td>
             <td>{data.description}</td>
