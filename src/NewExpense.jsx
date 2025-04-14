@@ -37,7 +37,6 @@ function ExpenseForm(){
             dates: newEntry.dates,
         }
         const updatedExpenses=[...formData,newExpenseEntry]
-        allExpenses===updatedExpenses
         setFormData(updatedExpenses)
         setNewEntry({ name: "", description: "", category: "", expense: "", dates: "" })
         console.log(updatedExpenses)
@@ -86,7 +85,7 @@ function ExpenseForm(){
                 <br/>
                 <input
                 id="expense"
-                type="text"
+                type="number"
                 placeholder="expense"
                 onChange={handleChange}
                 value={newEntry.expense}
