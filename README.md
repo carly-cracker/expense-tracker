@@ -6,6 +6,8 @@ A simple React-based application for tracking your expenses. Users can add new e
 
 - Add a new expense with details like name, description, category, amount, and date
 - View a table of all expenses
+- A filter search where you can search your expenses based on category and name
+- Alphabetical sort feature on category and name
 - Responsive layout: mobile-friendly and user-friendly interface
 
 ##  Preview
